@@ -19,6 +19,7 @@ class TransformsSimCLR:
                 torchvision.transforms.RandomHorizontalFlip(),  # with 0.5 probability
                 torchvision.transforms.RandomApply([color_jitter], p=0.8),
                 torchvision.transforms.RandomGrayscale(p=0.2),
+                torchvision.transforms.RandomSolarize(threshold=80, p=0.1),
                 torchvision.transforms.ToTensor(),
             ]
         )
