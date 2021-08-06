@@ -30,7 +30,7 @@ def train(args, train_loader, model, criterion, optimizer, writer):
         x_i = x_i.cuda(non_blocking=True)
         x_j = x_j.cuda(non_blocking=True)
 
-        # positive pair, with encoding
+        # positive pair, encoding
         h_i, h_j, z_i, z_j = model(x_i, x_j)
 
         loss = criterion(z_i, z_j)
@@ -155,15 +155,13 @@ def main(gpu, args):
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser(description="SimCLR")
     config = yaml_config_hook("./config/config.yaml")
     for k, v in config.items():
         parser.add_argument(f"--{k}", default=v, type=type(v))
-
     args = parser.parse_args()
 
-    # Master address for distributed data parallel
+    # Master address for distributed DD
     os.environ["MASTER_ADDR"] = "127.0.0.1"
     os.environ["MASTER_PORT"] = "8000"
 
