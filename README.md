@@ -7,6 +7,7 @@ Including support for:
 
 [Link to paper](https://arxiv.org/pdf/2002.05709.pdf)
 
+One additional feature in this implementation is another mask function wich also eliminates hardest unequal example from los function.
 
 
 ### Quickstart (fine-tune linear classifier)
