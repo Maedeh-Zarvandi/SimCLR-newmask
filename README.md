@@ -7,21 +7,10 @@ Including support for:
 
 [Link to paper](https://arxiv.org/pdf/2002.05709.pdf)
 
-Open SimCLR in Google Colab Notebook (with TPU support)
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1ObAYvVKQjMG5nd2wIno7j2y_X91E9IrX)
-
-Open SimCLR results comparison on tensorboard.dev:
-
-<p align="left">
-  <a href="https://tensorboard.dev/experiment/A3laNdafRBes0oR45Y6LiA/#scalars" target="_blank">
-    <img src="https://github.com/Spijkervet/SimCLR/blob/master/media/tensorboard.png?raw=true" height="40"/>
-  </a>
-</p>
 
 
 ### Quickstart (fine-tune linear classifier)
-This downloads a pre-trained model and trains the linear classifier, which should receive an accuracy of ±`82.9%` on the STL-10 test set.
+<!-- This downloads a pre-trained model and trains the linear classifier, which should receive an accuracy of ±`82.9%` on the STL-10 test set. -->
 ```
 git clone https://github.com/spijkervet/SimCLR.git && cd SimCLR
 wget https://github.com/Spijkervet/SimCLR/releases/download/1.2/checkpoint_100.tar
@@ -30,19 +19,19 @@ conda activate simclr
 python linear_evaluation.py --dataset=STL10 --model_path=. --epoch_num=100 --resnet resnet50
 ```
 
-#### CPU
+<!-- #### CPU
 ```
 wget https://github.com/Spijkervet/SimCLR/releases/download/1.1/checkpoint_100.tar -O checkpoint_100.tar
 python linear_evaluation.py --model_path=. --epoch_num=100 --resnet=resnet18 --logistic_batch_size=32
-```
-
+``` -->
+<!-- 
 ### `simclr` package
 SimCLR for PyTorch is now available as a Python package! Simply run and use it in your project:
 ```
 pip install simclr
-```
+``` -->
 
-You can then simply import SimCLR:
+<!-- You can then simply import SimCLR:
 ```
 from simclr import SimCLR
 
@@ -50,7 +39,7 @@ encoder = ResNet(...)
 projection_dim = 64
 n_features = encoder.fc.in_features  # get dimensions of last fully-connected layer
 model = SimCLR(encoder, projection_dim, n_features)
-```
+``` -->
 
 ### Training ResNet encoder:
 Simply run the following to pre-train a ResNet encoder using SimCLR on the CIFAR-10 dataset:
@@ -68,7 +57,7 @@ CUDA_VISIBLE_DEVICES=N python main.py --nodes 2 --nr 3
 ```
 
 
-### Results
+<!-- ### Results
 These are the top-1 accuracy of linear classifiers trained on the (frozen) representations learned by SimCLR:
 
 | Method  | Batch Size | ResNet | Projection output dimensionality | Epochs | Optimizer | STL-10 | CIFAR-10
@@ -78,30 +67,30 @@ These are the top-1 accuracy of linear classifiers trained on the (frozen) repre
 | SimCLR + Linear eval. | 256 | ResNet18 | 64 | 100 |  Adam | 0.765  | - |
 | SimCLR + Linear eval. | 256 | ResNet18 | 64 | 40 | Adam | 0.719  | - |
 | SimCLR + Linear eval. | 512 | ResNet18 | 64 | 40 | Adam | 0.71 | - |
-| Logistic Regression | - | - | - | 40 | Adam | 0.358 | 0.389 |
+| Logistic Regression | - | - | - | 40 | Adam | 0.358 | 0.389 | -->
 
 
-
+<!-- 
 ### Pre-trained models
 | ResNet (batch_size, epochs) | Optimizer | STL-10 Top-1 |
 | ------------- | ------------- | ------------- |
 | [ResNet50 (256, 100)](https://github.com/Spijkervet/SimCLR/releases/download/1.2/checkpoint_100.tar) | Adam | **0.829** |
 | [ResNet18 (256, 100)](https://github.com/Spijkervet/SimCLR/releases/download/1.1/checkpoint_100.tar) | Adam | 0.765 |
-| [ResNet18 (256, 40)](https://github.com/Spijkervet/SimCLR/releases/download/1.0/checkpoint_40.tar) | Adam | 0.719 |
+| [ResNet18 (256, 40)](https://github.com/Spijkervet/SimCLR/releases/download/1.0/checkpoint_40.tar) | Adam | 0.719 | -->
 
 `python linear_evaluation.py --model_path=. --epoch_num=100`
 
 #### LARS optimizer
 The LARS optimizer is implemented in `modules/lars.py`. It can be activated by adjusting the `config/config.yaml` optimizer setting to: `optimizer: "LARS"`. It is still experimental and has not been thoroughly tested.
 
-## What is SimCLR?
-SimCLR is a "simple framework for contrastive learning of visual representations". The contrastive prediction task is defined on pairs of augmented examples, resulting in 2N examples per minibatch. Two augmented versions of an image are considered as a correlated, "positive" pair (x_i and x_j). The remaining 2(N - 1) augmented examples are considered negative examples. The contrastive prediction task aims to identify x_j in the set of negative examples for a given x_i.
+<!-- ## What is SimCLR?
+SimCLR is a "simple framework for contrastive learning of visual representations". The contrastive prediction task is defined on pairs of augmented examples, resulting in 2N examples per minibatch. Two augmented versions of an image are considered as a correlated, "positive" pair (x_i and x_j). The remaining 2(N - 1) augmented examples are considered negative examples. The contrastive prediction task aims to identify x_j in the set of negative examples for a given x_i. -->
 
 <p align="center">
   <img src="https://github.com/Spijkervet/SimCLR/blob/master/media/architecture.png?raw=true" width="500"/>
 </p>
 
-## Usage
+<!-- ## Usage
 Run the following command to setup a conda environment:
 ```
 sh setup.sh
@@ -116,7 +105,7 @@ pip install -r requirements.txt
 Then, simply run for single GPU or CPU training:
 ```
 python main.py
-```
+``` -->
 
 For distributed training (DDP), use for every process in nodes, in which N is the GPU number you would like to dedicate the process to:
 ```
@@ -143,7 +132,7 @@ python linear_evaluation.py --model_path=./save --epoch_num=40
 
 
 ## Configuration
-The configuration of training can be found in: `config/config.yaml`. I personally prefer to use files instead of long strings of arguments when configuring a run. An example `config.yaml` file:
+The configuration of training can be found in: `config/config.yaml`. An example `config.yaml` file:
 ```
 # train options
 batch_size: 256
@@ -169,11 +158,11 @@ logistic_batch_size: 256
 logistic_epochs: 100
 ```
 
-## Logging and TensorBoard
+<!-- ## Logging and TensorBoard
 To view results in TensorBoard, run:
 ```
 tensorboard --logdir runs
-```
+``` -->
 
 ## Optimizers and learning rate schedule
 This implementation features the Adam optimizer and the LARS optimizer, with the option to decay the learning rate using a cosine decay schedule. The optimizer and weight decay can be configured in the `config/config.yaml` file.
