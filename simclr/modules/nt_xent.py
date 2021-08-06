@@ -25,6 +25,7 @@ class NT_Xent(nn.Module):
         return mask
 
 ###########################################
+# Here it comes the new mask function
     def mask_most_sim(self, sim):
         N = 2 * self.batch_size * self.world_size
         mask = torch.clone(input = self.mask)
